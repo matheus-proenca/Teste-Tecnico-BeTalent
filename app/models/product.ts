@@ -11,7 +11,10 @@ export default class Product extends compose(BaseModel, SoftDeletes) {
   declare nome: string
 
   @column()
-  declare image: string
+  declare imagem: string
+
+  @column()
+  declare descricao: string
 
   @column()
   declare quantidade_estoque: number
@@ -24,4 +27,7 @@ export default class Product extends compose(BaseModel, SoftDeletes) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
+
+  @column.dateTime()
+  declare deletedAt: DateTime | null
 }

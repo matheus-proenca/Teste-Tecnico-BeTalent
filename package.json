@@ -61,7 +61,8 @@
     "luxon": "^3.4.4",
     "mysql2": "^3.10.2",
     "node": "^18.20.4",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^10.0.0"
   },
   "hotHook": {
     "boundaries": [
