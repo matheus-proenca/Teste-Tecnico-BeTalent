@@ -376,7 +376,7 @@ Quando é passado um ID de um cliente não existente
 
 ```json
 {
-  "message": "failed to delete"
+  "message": "customer not found"
 }
 ```
 </details>
@@ -545,6 +545,80 @@ quando o ID passado não existe
 ```json
 {
   "message": "product not found"
+}
+```
+</details>
+
+## Endpoint /sell
+
+### <code class="post">POST - STORE</code> /sell
+<details>
+  <summary>📃 Body</summary>
+
+```form
+{
+  "client_id": 1,
+  "product_id": 1,
+  "quantidade": 2
+}
+```
+</details>
+
+<summary class="ok">✅ Response Ok - 200</summary>
+
+```json
+{
+  message": "sell created successfully",
+  "data": {
+    "cliente": {
+      "nome": "Matheus",
+      "cpf": "40615522955"
+    },
+    "produto": {
+      "nome": "fogao",
+      "imagem": "x6mv2m0vsih7cgsmpiyq01zd.webp",
+      "descricao": "dasdassssssssss",
+      "quantidade_estoque": 1,
+      "valor": 239.99
+    },
+    "quantidade": 2,
+    "preco_unitario": 239.99,
+    "preco_total": 479.98
+  }
+}
+```
+
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+Quando o client_id passado não existe
+  
+```json
+{
+  "message": "client not found"
+}
+```
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+Quando o product_id passado não existe
+  
+```json
+{
+  "message": "product not found"
+}
+```
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+Quando a quantidade inserida e maior que quantidade em estoque do produto
+  
+```json
+{
+  "message": "product out of stock"
 }
 ```
 </details>
