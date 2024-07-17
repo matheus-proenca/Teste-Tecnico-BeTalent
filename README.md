@@ -1,10 +1,92 @@
-# Teste-Tecnico-BeTalent
+<h1>Teste Técnico Backend BeTalent</h1>
 
-## Diagrama do Banco de Dados
+## Tecnologias ultilizadas no teste
+![AdonisJS](https://img.shields.io/badge/AdonisJS-6.0-brightgreen)
+![MySQL](https://img.shields.io/badge/MySQL-blue)
+![Node.js](https://img.shields.io/badge/Node.js-v22.5-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-blue)
+![Lucid](https://img.shields.io/badge/Lucid-orm-brightgreen)
 
-![diagrama banco de dados][diagrama-banco-de-dados.png]
+## Descrição sobre o teste
+<p>Consiste em estruturar uma API RESTful conectada a um banco de dados. Um sistema que permite cadastrar usuários. Ao realizarem login, estes usuários deverão poder registrar clientes, produtos e vendas</p>
 
-## Endpoints Desta Api
+## Requisitos
+- Estruturar o sistema observando o MVC (porém, sem as views)
+- Respostas devem ser em JSON
+- Usar MySQL como banco de dados
+
+<br>
+
+## Como executar a aplicação localmente
+
+1. Clone o repositório:
+
+```bash
+git clone git@github.com:matheus-proenca/Teste-Tecnico-BeTalent.git
+```
+
+2. Navegue até a pasta:
+
+```bash
+cd Teste-Tecnico-BeTalent
+```
+
+3. Instale as dependências:
+
+```bash
+npm install
+```
+
+4.Configure as variáveis de ambiente
+
+```bash
+cp .env.example .env
+```
+
+5.Execute as migrações do banco de dados
+
+```bash
+node ace migration:run
+```
+
+Caso node ace não apareça verifique se node esta na versão mais recente
+
+```bash
+nvm i node
+```
+
+6.Inicie o servidor de desenvolvimento
+
+```bash
+node ace serve --watch
+```
+
+<br>
+
+## **Estrutura do banco de dados**
+
+<img src="diagrama banco de dados.png">
+
+<br>
+
+## Funcionalidades dessa Api
+- Cadastra um usuário(SignUp)
+- Login com Token(Login)
+- Cria um cliente(Store)
+- Lista todos os cliente(Index)
+- Lista um cliente e sua vendas pelo ID com filtro por mes e ano ou sem filtro(Show)
+- Atuliza um cliente pelo ID(Update)
+- Deleta um cliente pelo ID(Destroy)
+- Cria um produto(Store)
+- Lista todos os protdutos(Index)
+- Lista um produto pelo ID(Show)
+- Atuliza ou restaura um produto pelo ID(Update)
+- Deleta(SoftDelete) um produto pelo ID(Destroy)
+- Registra uma venda(Store)
+
+<br>
+
+## Endpoints dessa Api
 
 <details>
   <summary><strong>Endpoint /user</strong></summary>
