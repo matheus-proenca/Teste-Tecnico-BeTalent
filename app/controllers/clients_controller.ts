@@ -70,7 +70,7 @@ export default class ClientsController {
         .preload('endereco')
         .preload('telefone')
 
-      if (mes || ano) {
+      if (mes && ano) {
         const sales = await Sell.query()
           .where('client_id', params.id)
           .whereBetween('created_at', [`${ano}-${mes}-1 00:00:00`, `${ano}-${mes}-31 23:59:59`])
@@ -107,7 +107,7 @@ export default class ClientsController {
       const address = await Address.findOrFail(params.id)
 
       if (!client || !fone || !address) {
-        return response.status(200).json({
+        return response.status(400).json({
           message: 'client not found',
         })
       }

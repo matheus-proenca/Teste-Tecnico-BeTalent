@@ -66,12 +66,24 @@ export default class ProductsController {
 
   async update({ request, response, params }: HttpContext) {
     try {
-      const product = await Product.findOrFail(params.id)
+      const product = await Product.find(params.id)
       const image = request.file('imagem', {
         extnames: ['jpg', 'png', 'jpeg'],
         size: '2mb',
       })
       const body = request.only(['nome', 'quantidade_estoque', 'descricao', 'valor', 'imagem'])
+      if (!product) {
+        const productRestore = await Product.onlyTrashed().where('id', params.id).first()
+        if (!productRestore) {
+          return response.status(400).json({
+            message: 'product not found',
+          })
+        }
+        await productRestore.restore()
+        return response.status(200).json({
+          message: 'restored product',
+        })
+      }
       if (image && body.nome && body.quantidade_estoque && body.valor && body.descricao) {
         const nameImage = `${cuid()}.${image.extname}`
         await image.move(app.makePath('uploads'), {
