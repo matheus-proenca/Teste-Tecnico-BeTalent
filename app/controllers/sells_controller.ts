@@ -8,11 +8,6 @@ export default class SellsController {
     try {
       const body = request.only(['client_id', 'product_id', 'quantidade'])
       const client = await Client.findOrFail(body.client_id)
-      if (!client) {
-        return response.status(400).json({
-          message: 'client not found',
-        })
-      }
       const product = await Product.find(body.product_id)
       if (!product) {
         return response.status(400).json({
@@ -56,7 +51,7 @@ export default class SellsController {
       })
     } catch (error) {
       return response.status(400).json({
-        message: 'failed to created',
+        message: 'client not found',
       })
     }
   }
