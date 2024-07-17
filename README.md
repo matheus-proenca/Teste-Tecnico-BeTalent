@@ -380,3 +380,171 @@ Quando é passado um ID de um cliente não existente
 }
 ```
 </details>
+
+## Endpoint /product
+
+### <code class="post">POST - STORE</code> /product
+<details>
+  <summary>📃 Body</summary>
+
+```form
+{
+  "nome": "geladeira",
+  "quantidade_estoque": 1,
+  "valor": 219.00,
+  "descricao": "é uma geladeira"
+  "imagem": "geladeira.jpg"
+}
+```
+</details>
+
+<details>
+  <summary class="created">✅ Response Created - 201</summary>
+
+```json
+{
+  "message": "user created successfully",
+}
+```
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+Quando um dos campos então faltando
+
+```json
+{
+  "message": "all fields are required"
+}
+```
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+
+```json
+{
+  "message": "error when listing products"
+}
+```
+</details>
+
+### <code class="get">GET - INDEX</code> /product
+
+<details>
+  <summary class="ok">✅ Response Ok - 200</summary>
+
+```json
+{
+  "data": [
+    {
+      "nome": "geladeira",
+      "quantidade_estoque": 1,
+      "valor": 219.00,
+      "descricao": "é uma geladeira"
+      "imagem": "geladeira.jpg"
+    }
+  ]
+}
+```
+</details>
+
+### <code class="get">GET - SHOW</code> /product/:id
+
+<details>
+  <summary class="ok">✅ Response Ok - 200</summary>
+
+```json
+{
+  "data": [
+    {
+      "nome": "geladeira",
+      "quantidade_estoque": 1,
+      "valor": 219.00,
+      "descricao": "é uma geladeira"
+      "imagem": "geladeira.jpg"
+    }
+  ]
+}
+```
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+quando o ID passado não existe
+  
+```json
+{
+  "message": "id does not exist"
+}
+```
+</details>
+
+### <code class="put">PUT - UPDATE</code> /product/:id
+
+<details>
+  <summary>📃 Body</summary>
+
+```form
+{
+  "nome": "geladeira",
+  "quantidade_estoque": 1,
+  "valor": 219.00,
+  "descricao": "é uma geladeira"
+  "imagem": "geladeira.jpg"
+}
+```
+</details>
+
+<details>
+  <summary class="ok">✅ Response Ok - 200</summary>
+
+```json
+{
+  "message": "product updated successfully",
+}
+```
+Caso seja passado um ID que foi deletado
+
+```json
+{
+  "message": "product successfully restored",
+}
+```
+
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+quando o ID passado não existe
+  
+```json
+{
+  "message": "product not found"
+}
+```
+</details>
+
+### <code class="delete">DELETE - DESTROY</code> /product/:id
+
+<details>
+  <summary class="ok">✅ Response Ok - 200</summary>
+
+```json
+{
+  "message": "product deleted successfully"
+}
+```
+
+</details>
+
+<details>
+  <summary class="badrequest">❌ Response Bad Request - 400</summary>
+quando o ID passado não existe
+  
+```json
+{
+  "message": "product not found"
+}
+```
+</details>
