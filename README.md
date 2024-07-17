@@ -568,7 +568,7 @@ quando o ID passado não existe
 
 ```json
 {
-  message": "sell created successfully",
+  "message": "sell created successfully",
   "data": {
     "cliente": {
       "nome": "Matheus",
