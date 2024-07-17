@@ -121,7 +121,7 @@ Quando o campo do email ou password são incorretos
 ```
 </details>
 
-### <code class="post">POST</code> /client
+### <code class="post">POST - CREATED</code> /client
 <details>
   <summary>📃 Body</summary>
 
@@ -197,7 +197,7 @@ Quando o cliente ja existe
 ```
 </details>
 
-### <code class="post">GET</code> /client
+### <code class="get">GET - INDEX</code> /client
 
 <details>
   <summary class="ok">✅ Response Ok - 200</summary>
@@ -238,7 +238,8 @@ Caso não possua algo no banco de dados
 }
 ```
 </details>
-### <code class="post">GET</code> /client/:id?mes=07&ano=2024
+
+### <code class="get">GET - SHOW</code> /client/:id?mes=07&ano=2024
 
 <details>
   <summary class="Ok">✅ Response Ok - 200</summary>
@@ -304,13 +305,13 @@ Quando não é passado o id
 ```
 </details>
 
-### <code class="post">POST</code> /client/:id
+### <code class="put">PUT - UPDATE</code> /client/:id
 <details>
   <summary>📃 Body</summary>
 
 ```json
 {
-  "nome": "Matheus",t
+  "nome": "Matheus",
   "cpf":"40615522955",
   "endereco":{
     "estado":"Santa Catarina",
@@ -352,12 +353,12 @@ Quando é passado um ID de um cliente não existente
 
 ```json
 {
-  message: 'failed to update'
+  "message": "failed to updated"
 }
 ```
 </details>
 
-### <code class="delete">DELETE</code> /client/:id 
+### <code class="delete">DELETE - DESTROY</code> /client/:id 
 
 <details>
   <summary class="ok">✅ Response Ok - 200</summary>
