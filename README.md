@@ -1,8 +1,9 @@
 # Teste-Tecnico-BeTalent
 
-# Endpoints Deste Projeto
+# Endpoints Desta Api
 
-## Endpoint /user
+<details>
+  <summary><strong>Endpoint /user</strong></summary>
 
 ### <code class="post">POST</code> /user/signup
 <details>
@@ -104,7 +105,10 @@ Quando o campo do email ou password são incorretos
 ```
 </details>
 
-## Endpoint /client
+</details>
+
+<details>
+  <summary><strong>Endpoint /client</strong></summary>
 
 <details>
   <summary class="unauthorized">❌ Response Unauthorized - 401</summary>
@@ -381,7 +385,10 @@ Quando é passado um ID de um cliente não existente
 ```
 </details>
 
-## Endpoint /product
+</details>
+
+<details>
+  <summary><strong>Endpoint /product</strong></summary>
 
 ### <code class="post">POST - STORE</code> /product
 <details>
@@ -549,7 +556,10 @@ quando o ID passado não existe
 ```
 </details>
 
-## Endpoint /sell
+</details>
+
+<details>
+  <summary><strong>Endpoint /product</strong></summary>
 
 ### <code class="post">POST - STORE</code> /sell
 <details>
