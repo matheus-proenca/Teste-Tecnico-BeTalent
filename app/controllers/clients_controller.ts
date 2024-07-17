@@ -14,12 +14,23 @@ export default class ClientsController {
       const fone = body.telefone
 
       if (isCPF(body.cpf) === false) {
-        return response.status(500).json({
+        return response.status(400).json({
           message: 'CPF is invalid',
         })
       }
 
-      if (!body.nome || !body.cpf || !body.endereco || !body.telefone) {
+      if (
+        !body.nome ||
+        !body.cpf ||
+        !body.endereco ||
+        !body.endereco.estado ||
+        !body.endereco.cidade ||
+        !body.endereco.rua ||
+        !body.endereco.numero_casa ||
+        !body.telefone ||
+        !body.telefone.ddd ||
+        !body.telefone.numero
+      ) {
         return response.status(400).json({
           message: 'all fields are required',
         })
@@ -49,26 +60,22 @@ export default class ClientsController {
   }
 
   async index({ response }: HttpContext) {
-    try {
-      const clients = await Client.query().preload('endereco').preload('telefone')
+    const clients = await Client.query().preload('endereco').preload('telefone')
 
-      return response.status(200).json({
-        data: clients,
-      })
-    } catch (error) {
-      return response.status(400).json({
-        message: 'error when listing clients',
-      })
-    }
+    return response.status(200).json({
+      data: clients,
+    })
   }
 
   async show({ params, request, response }: HttpContext) {
     try {
       const { mes, ano } = request.qs()
       const client = await Client.query()
+        .select('id', 'nome', 'cpf')
         .where('id', params.id)
         .preload('endereco')
         .preload('telefone')
+        .firstOrFail()
 
       if (mes && ano) {
         const sales = await Sell.query()
@@ -102,13 +109,13 @@ export default class ClientsController {
   async update({ request, params, response }: HttpContext) {
     try {
       const body = request.only(['nome', 'cpf', 'endereco', 'telefone'])
-      const client = await Client.findOrFail(params.id)
-      const fone = await Fone.findOrFail(params.id)
-      const address = await Address.findOrFail(params.id)
+      const client = await Client.find(params.id)
+      const fone = await Fone.query().where('client_id', params.id).first()
+      const address = await Address.query().where('client_id', params.id).first()
 
       if (!client || !fone || !address) {
         return response.status(400).json({
-          message: 'client not found',
+          message: 'customer not found',
         })
       }
       client.nome = body.nome || client.nome
@@ -125,7 +132,7 @@ export default class ClientsController {
       fone.save()
 
       return response.status(200).json({
-        message: 'client updated successfully',
+        message: 'customer updated successfully',
       })
     } catch (error) {
       return response.status(400).json({
@@ -136,13 +143,18 @@ export default class ClientsController {
 
   async destroy({ response, params }: HttpContext) {
     try {
-      await Client.query().where('id', params.id).preload('endereco').preload('telefone').delete()
+      const client = await Client.query()
+        .where('id', params.id)
+        .preload('endereco')
+        .preload('telefone')
+        .firstOrFail()
+      await client.delete()
       return response.status(200).json({
-        message: 'client deleted successfully',
+        message: 'customer deleted successfully',
       })
     } catch (error) {
       return response.status(400).json({
-        message: 'failed to delete',
+        message: 'customer not found',
       })
     }
   }

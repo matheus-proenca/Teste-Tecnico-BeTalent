@@ -25,7 +25,6 @@ export default class extends BaseSchema {
       table.integer('preco_total').notNullable
 
       table.timestamp('created_at')
-      table.timestamp('updated_at')
     })
   }
 

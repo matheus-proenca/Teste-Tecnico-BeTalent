@@ -5,8 +5,12 @@ const SellsController = () => import('#controllers/sells_controller')
 const UsersController = () => import('#controllers/users_controller')
 const ClientsController = () => import('#controllers/clients_controller')
 
-router.post('/singup', [UsersController, 'singup'])
-router.post('/login', [UsersController, 'login'])
+router
+  .group(() => {
+    router.post('/signup', [UsersController, 'signup'])
+    router.post('/login', [UsersController, 'login'])
+  })
+  .prefix('/user')
 
 router
   .group(() => {

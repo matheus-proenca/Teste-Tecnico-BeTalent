@@ -38,17 +38,13 @@ export default class ProductsController {
   }
 
   async index({ response }: HttpContext) {
-    try {
-      const productList = await Product.query().orderBy('products.nome', 'asc')
+    const productList = await Product.query()
+      .select('id', 'nome', 'imagem', 'descricao', 'quantidade_estoque', 'valor')
+      .orderBy('products.nome', 'asc')
 
-      return response.status(200).json({
-        data: productList,
-      })
-    } catch (error) {
-      return response.status(400).json({
-        message: 'error when listing products',
-      })
-    }
+    return response.status(200).json({
+      data: productList,
+    })
   }
 
   async show({ params, response }: HttpContext) {
