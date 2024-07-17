@@ -1,18 +1,28 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
 import Client from './client.js'
-import { HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasOne } from '@adonisjs/lucid/types/relations'
 import Product from './product.js'
 
 export default class Sell extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @hasOne(() => Client)
-  declare client_id: HasOne<typeof Client>
+  @column()
+  declare client_id: number
 
-  @hasOne(() => Product)
-  declare product_id: HasOne<typeof Product>
+  @hasOne(() => Client, {
+    foreignKey: 'client_id',
+  })
+  declare cliente: HasOne<typeof Client>
+
+  @column()
+  declare product_id: number
+
+  @hasOne(() => Product, {
+    foreignKey: 'product_id',
+  })
+  declare produto: HasOne<typeof Product>
 
   @column()
   declare quantidade: number

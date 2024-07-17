@@ -9,7 +9,8 @@ export default class extends BaseSchema {
       table
         .integer('client_id')
         .unsigned()
-        .references('clients.id')
+        .references('id')
+        .inTable('clients')
         .onDelete('CASCADE')
         .onUpdate('CASCADE').notNullable
       table.integer('ddd').notNullable

@@ -1,7 +1,9 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import { compose } from '@adonisjs/core/helpers'
 import { SoftDeletes } from 'adonis-lucid-soft-deletes'
+import Sell from './sell.js'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 
 export default class Product extends compose(BaseModel, SoftDeletes) {
   @column({ isPrimary: true })
@@ -21,6 +23,11 @@ export default class Product extends compose(BaseModel, SoftDeletes) {
 
   @column()
   declare valor: Number
+
+  @belongsTo(() => Sell, {
+    foreignKey: 'product_id',
+  })
+  declare venda: BelongsTo<typeof Sell>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

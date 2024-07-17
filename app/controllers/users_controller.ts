@@ -6,6 +6,17 @@ export default class UsersController {
   async singup({ request, response }: HttpContext) {
     try {
       const body = request.only(['email', 'password'])
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(body.email)) {
+        return response.status(400).json({
+          message: 'email is invalid',
+        })
+      }
+      if (!body.email || !body.password) {
+        return response.status(400).json({
+          message: 'all fields are required',
+        })
+      }
       await User.create(body)
       response.status(201)
       return {
