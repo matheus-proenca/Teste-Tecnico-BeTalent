@@ -100,32 +100,38 @@ export default class ClientsController {
   }
 
   async update({ request, params, response }: HttpContext) {
-    const body = request.only(['nome', 'cpf', 'endereco', 'telefone'])
-    const client = await Client.findOrFail(params.id)
-    const fone = await Fone.findOrFail(params.id)
-    const address = await Address.findOrFail(params.id)
+    try {
+      const body = request.only(['nome', 'cpf', 'endereco', 'telefone'])
+      const client = await Client.findOrFail(params.id)
+      const fone = await Fone.findOrFail(params.id)
+      const address = await Address.findOrFail(params.id)
 
-    if (!client || !fone || !address) {
+      if (!client || !fone || !address) {
+        return response.status(200).json({
+          message: 'client not found',
+        })
+      }
+      client.nome = body.nome || client.nome
+      client.cpf = body.cpf || client.cpf
+      address.estado = body.endereco.estado || address.estado
+      address.cidade = body.endereco.cidade || address.cidade
+      address.numero_casa = body.endereco.numero_casa || address.numero_casa
+      address.rua = body.endereco.rua || address.rua
+      fone.ddd = body.telefone.ddd || fone.ddd
+      fone.numero = body.telefone.numero || fone.numero
+
+      client.save()
+      address.save()
+      fone.save()
+
       return response.status(200).json({
-        message: 'client not found',
+        message: 'client updated successfully',
+      })
+    } catch (error) {
+      return response.status(400).json({
+        message: 'failed to update',
       })
     }
-    client.nome = body.nome || client.nome
-    client.cpf = body.cpf || client.cpf
-    address.estado = body.endereco.estado || address.estado
-    address.cidade = body.endereco.cidade || address.cidade
-    address.numero_casa = body.endereco.numero_casa || address.numero_casa
-    address.rua = body.endereco.rua || address.rua
-    fone.ddd = body.telefone.ddd || fone.ddd
-    fone.numero = body.telefone.numero || fone.numero
-
-    client.save()
-    address.save()
-    fone.save()
-
-    return response.status(200).json({
-      message: 'client updated successfully',
-    })
   }
 
   async destroy({ response, params }: HttpContext) {
