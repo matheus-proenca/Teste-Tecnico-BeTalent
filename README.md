@@ -1,6 +1,10 @@
 # Teste-Tecnico-BeTalent
 
-# Endpoints Desta Api
+## Diagrama do Banco de Dados
+
+![diagrama banco de dados][diagrama-banco-de-dados.png]
+
+## Endpoints Desta Api
 
 <details>
   <summary><strong>Endpoint /user</strong></summary>
