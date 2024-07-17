@@ -564,7 +564,7 @@ quando o ID passado não existe
 ```
 </details>
 
-</details>
+<details>
   <summary class="ok">✅ Response Ok - 200</summary>
 
 ```json
@@ -578,13 +578,13 @@ quando o ID passado não existe
     "produto": {
       "nome": "fogao",
       "imagem": "x6mv2m0vsih7cgsmpiyq01zd.webp",
-      "descricao": "dasdassssssssss",
+      "descricao": "é um fogão",
       "quantidade_estoque": 1,
       "valor": 239.99
     },
-    "quantidade": 2,
+    "quantidade": 1,
     "preco_unitario": 239.99,
-    "preco_total": 479.98
+    "preco_total": 239.99
   }
 }
 ```
