@@ -1,4 +1,6 @@
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import Client from '#models/client'
 
 export default class Address extends BaseModel {
   @column({ isPrimary: true })
@@ -15,4 +17,12 @@ export default class Address extends BaseModel {
 
   @column()
   declare numero_casa: number
+
+  @column()
+  declare client_id: number
+
+  @belongsTo(() => Client, {
+    foreignKey: 'client_id',
+  })
+  declare cliente: BelongsTo<typeof Client>
 }
