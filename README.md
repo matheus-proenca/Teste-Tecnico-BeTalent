@@ -70,7 +70,7 @@ node ace serve --watch
 <br>
 
 ## Funcionalidades dessa Api
-- Cadastra um usuário(SignUp)
+- Cadastra um usuário(Signup)
 - Login com Token(Login)
 - Cria um cliente(Store)
 - Lista todos os cliente(Index)
