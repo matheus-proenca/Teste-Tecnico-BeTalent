@@ -564,7 +564,8 @@ quando o ID passado não existe
 ```
 </details>
 
-<summary class="ok">✅ Response Ok - 200</summary>
+</details>
+  <summary class="ok">✅ Response Ok - 200</summary>
 
 ```json
 {
