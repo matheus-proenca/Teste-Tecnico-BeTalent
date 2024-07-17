@@ -559,7 +559,7 @@ quando o ID passado não existe
 </details>
 
 <details>
-  <summary><strong>Endpoint /product</strong></summary>
+  <summary><strong>Endpoint /sell</strong></summary>
 
 ### <code class="post">POST - STORE</code> /sell
 <details>
